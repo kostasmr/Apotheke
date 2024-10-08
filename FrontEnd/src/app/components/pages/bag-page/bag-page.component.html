@@ -1,6 +1,6 @@
 <div class="sidenav">
   <a routerLink="/users-page" class="btn1"><span class="pi pi-users" style="font-size: 30px;"></span> Users</a>
-  <a routerLink="/supplier-page" class="btn2"><span class="pi pi-truck" style="font-size: 30px;"></span> Suppliers</a>
+  <!-- <a routerLink="/supplier-page" class="btn2"><span class="pi pi-truck" style="font-size: 30px;"></span> Suppliers</a> -->
   <a routerLink="/" class="btn3"><span class="pi pi-box" style="font-size: 30px;"></span> Products</a>
   <a routerLink="/orders-page" class="btn3"><span class="pi pi-list" style="font-size: 30px;"></span> Orders</a>
 </div>
@@ -8,29 +8,35 @@
 
 <div class="content">
   <div class="title">Bag</div>
-    <ul class="products">
-      <li *ngFor="let bagItem of bag.items" class="product">
-        <div class="info">
-          <a>
-            Product: {{bagItem.product.name}}
-          </a>
-        </div>
-        <div class="info">
-            <a>
-                Quantity: {{bagItem.product.bagQuantity}}
-            </a>
-        </div>
-        <div class="remove_btn">
-          <p-button  label="Remove" styleClass="p-button-outlined p-button-danger p-button-sm" (click)="removeFromBag(bagItem)">
-          </p-button>
-        </div>
-      </li>
-    </ul>
+    <div style="display: flex;">
+      <ul class="products">
+        <li *ngFor="let bagItem of bag.items" class="product">
+          <div style="display: flex;">
+            <div class="info">
+              <a>
+                Product: {{bagItem.product.name}}
+              </a>
+            </div>
+            <div class="info">
+                <a>
+                    Quantity: {{bagItem.product.bagQuantity}}
+                </a>
+            </div>
+            <div style="margin-left: 10px;">
+              <p-button  icon="pi pi-times" styleClass="p-button-outlined p-button-danger p-button-rounded" (click)="removeFromBag(bagItem)">
+              </p-button>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="total" style="margin-left: auto;margin-right: 80px;margin-top: 650px;">
+        Total products: {{bag.totalCount}}
+        <hr style="margin-top: 20px;">
+      <div style="margin-top: 20px;margin-left: 100px;">
+        <p-button  label="Send" icon="pi pi-truck" styleClass="p-button-rounded p-button-success" (click)="sendTheOrder()"></p-button>
+      </div>
 
-    <div>
-        <div class="total">Total products: {{bag.totalCount}}
-        <p-button  class="send_btn" label="Send" styleClass="p-button-outlined p-button-success" (click)="sendTheOrder()"></p-button>
-        </div>
-        <!--<div>Total Quantity of products: {{bag.totalBagQuantity}}</div>-->
+      </div>
+          <!--<div>Total Quantity of products: {{bag.totalBagQuantity}}</div>-->
     </div>
 </div>

@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 
 app.use(cors({
     credentials:true,
-    origin:["http://localhost:4200"]
+    origin:[process.env.WEB_HOST!]
 }));
 
 app.use("/api/products", productRouter);

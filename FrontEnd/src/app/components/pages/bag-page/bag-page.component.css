@@ -85,8 +85,6 @@
     color: rgb(20, 53, 104);
     font-size: 20px;
     letter-spacing: 3px;
-    padding-left: 2%;
-    padding-top: 2%;
   }
 
   .info{
@@ -96,16 +94,5 @@
     padding-left: 1%;
     padding-top: 0.5%;
   }
-
-.remove_btn{
-    padding-left: 1%;
-    padding-top: 1%;
-}
-
-.send_btn{
-  position: relative;
-  float:right;
-  padding-right: 2%;
-}
   
   

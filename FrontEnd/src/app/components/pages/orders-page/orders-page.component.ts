@@ -40,17 +40,6 @@ export class OrdersPageComponent implements OnInit{
         })
       })
   }
-  /*
-  viewOrder(orderId: string){
-    const dialogRef = this._dialog.open(OrderFormComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-        }
-      },
-    });
-  }
-  */
 
   viewOrder(data: any){
     const dialogRef = this._dialog.open(OrderFormComponent, {

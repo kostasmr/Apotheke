@@ -1,6 +1,40 @@
 <div class="container">
-    <div class="grid">
-        <div class="logo">Apotheke.</div>
+    <div class="grid2" *ngIf="resetPass">
+        <div class="logo">Apotheke</div>
+        <div class="info">
+            <a>Please enter your account's email address below and click the button 'Reset'.
+            You will receive an email that contains link to set a new password.
+            </a>
+        </div>
+        <form [formGroup]="resetForm" (ngSubmit)="resetPassword()">
+            <div class="login">
+                <div class="p-fluid">
+                    <div class="field">
+                        <label class="labels">Email</label>
+                        <input pInputText type="text" placeholder="Email" formControlName="email"/>
+                        <div class="error-list" *ngIf="reset_fc.email.errors && isSubmitted2">
+                            <div *ngIf="reset_fc.email.errors.required">Should not be empty</div>
+                            <div *ngIf="reset_fc.email.errors.email">Email is not correct</div>
+                        </div>
+                    </div>
+                    <p-button label="Reset" styleClass="p-button-raised p-button-text p-button-help" type="submit"></p-button>
+                </div>
+            </div>
+            <div class="back-btn">
+                <p-button label="Back to Login Page" styleClass="p-button-help p-button-text" (click)="resetPass=false"></p-button>
+            </div>
+        </form>
+    </div>
+    <div class="grid" *ngIf="!resetPass">
+        <div class="logo">Apotheke</div>
+        <p-messages>
+            *ngIf="!successLogin"
+            [(value)]="msgs[0]" 
+        </p-messages>
+        <p-messages>
+            *ngIf="successLogin"
+            [(value)]="msgs[1]" 
+        </p-messages>
         <div class="login">
             <form [formGroup]="loginForm" (ngSubmit)="submit()">
             <div class="p-fluid">
@@ -12,7 +46,6 @@
                         <div *ngIf="fc.email.errors.email">Email is not correct</div>
                     </div>
                 </div>
-
                 <div class="field">
                     <label class="labels">Password</label>
                     <input pInputText type="password" placeholder="Password" formControlName="password"/>
@@ -20,7 +53,6 @@
                         <div *ngIf="fc.password.errors.required">Should not be empty</div>
                     </div>
                 </div>
-
                 <p-button label="Login" type="submit" icon="pi pi-sign-in" styleClass="p-button-raised p-button-text p-button-help"></p-button>
             </div>
         </form>
@@ -31,8 +63,11 @@
         <div class="signup">
             <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-raised p-button-text p-button-success" (click)="registerForm()"></p-button>
         </div>
+        <!-- <div class="signup">
+            <p-button label="Reset Page" routerLink="/reset-password-page" styleClass="p-button-raised p-button-text"></p-button>
+        </div> -->
         <div class="reset">
-            <a href="#">Forgot password?</a>
+            <a (click)="resetPass=true">Forgot password?</a>
         </div>
     </div>
 </div>

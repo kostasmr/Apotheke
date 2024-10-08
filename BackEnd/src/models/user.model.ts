@@ -1,4 +1,5 @@
 import mongoose, { Schema, StringSchemaDefinition, model } from 'mongoose';
+import { OrderModel } from './order.model';
 
 const bcrypt = require('bcryptjs');
 
@@ -9,6 +10,7 @@ export interface User{
     password:string;
     isAdmin:boolean;
     token:string;
+    resetToken: string;
     tokens:any;
 }
 
@@ -33,6 +35,10 @@ export const UserSchema = new Schema<User>({
         required:true 
     },
     token: { 
+        type: String, 
+        require: false
+    },
+    resetToken: { 
         type: String, 
         require: false
     },

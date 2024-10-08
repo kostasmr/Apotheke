@@ -28,7 +28,7 @@ import { UserFormPageComponent } from './components/forms/user-form-page/user-fo
 import { UserProfilePageComponent } from './components/pages/user-profile-page/user-profile-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ImageModule } from 'primeng/image';
-import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
+import { RegisterPageComponent } from './components/forms/register-page/register-page.component';
 import { SupplierPageComponent } from './components/pages/supplier-page/supplier-page.component';
 import { MessagesModule } from 'primeng/messages';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -39,6 +39,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { SplitterModule } from 'primeng/splitter';
 import { OrdersPageComponent } from './components/pages/orders-page/orders-page.component';
 import { OrderFormComponent } from './components/forms/order-form/order-form.component';
+import { ResetPasswordPageComponent } from './components/pages/reset-password-page/reset-password-page.component';
 
 
 
@@ -58,6 +59,7 @@ import { OrderFormComponent } from './components/forms/order-form/order-form.com
     SupplierPageComponent,
     OrdersPageComponent,
     OrderFormComponent,
+    ResetPasswordPageComponent,
   ],
   imports: [
     BrowserModule,

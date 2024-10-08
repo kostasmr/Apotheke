@@ -10,6 +10,7 @@ import { UserProfilePageComponent } from './components/pages/user-profile-page/u
 import { SupplierPageComponent } from './components/pages/supplier-page/supplier-page.component';
 import { OrdersPageComponent } from './components/pages/orders-page/orders-page.component';
 import { OrderFormComponent } from './components/forms/order-form/order-form.component';
+import { ResetPasswordPageComponent } from './components/pages/reset-password-page/reset-password-page.component';
 
 const routes: Routes = [
   { path: '', component:HomeComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'searchSupplier/:searchTerm', component: SupplierPageComponent},
   { path: 'logout', component: LoginPageComponent},
   { path: 'orders-page', component: OrdersPageComponent},
-  { path: 'order/:id', component: OrderFormComponent}
+  { path: 'order/:id', component: OrderFormComponent},
+  { path: 'reset-password-page', component: ResetPasswordPageComponent},
 ];
 
 

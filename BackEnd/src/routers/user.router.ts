@@ -6,6 +6,7 @@ import { User, UserModel } from '../models/user.model';
 import { HTTP_BAD_REQUEST, HTTP_UNAUTHORIZED } from '../constants/http_status';
 import auth from '../middlewares/auth'
 
+const sendEmail = require("../utils/sendEmail")
 const router = Router();
 const bcrypt = require('bcryptjs');
 
@@ -32,18 +33,60 @@ router.post("/login", expressAsyncHandler(
         const {email, password} = req.body;
         const user = await UserModel.findOne({email});
         if(!user){
-            res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
+            res.status(HTTP_BAD_REQUEST).send("This user does not exists!");
         }else{
             const isMatch = await bcrypt.compare(password, user.password);
             if(isMatch){
                 const token = generateTokenResponse(user);
                 res.send(user);
             }else{
-                res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
+                res.status(HTTP_BAD_REQUEST).send("This password is invalid!");
             } 
         }
     }
 ));
+
+router.post("/reset", expressAsyncHandler(
+    async (req, res) => {
+        const email = req.body;
+        const user  = await UserModel.findOne(email);
+        if(!user){
+            res.status(HTTP_BAD_REQUEST).send("User doesn't exist!");
+        }else{
+            const resetToken = generateResetTokenResponse(user);
+            user.resetToken = resetToken;
+
+            const resetUrl = `${process.env.WEB_HOST!}/reset-password-page`;
+
+            const message = `Reset password in this page-link below. \n\n ${resetUrl}`
+
+            await sendEmail({
+                email: user.email,
+                subject: "Password reset token",
+                message
+            })
+            res.status(200).send("Email sent");
+        }
+    }
+))
+
+router.patch("/reset", expressAsyncHandler(
+    async (req, res) => {
+        const {email, password} = req.body;
+        const user  = await UserModel.findOne({email: email});
+        console.log(email)
+        if(!user){
+            res.status(HTTP_BAD_REQUEST).send("User doesn't exist!");
+        }else{ 
+            const hashedPassword = await bcrypt.hash(password, 8);
+            await UserModel.findByIdAndUpdate(user.id,
+            {
+                password: hashedPassword,
+            },
+            {new: true});
+        }
+    }
+))
 
 router.get("/logout", expressAsyncHandler(
     async (req, res) => {
@@ -118,6 +161,7 @@ router.post("/register", expressAsyncHandler(
                 password: encryptedPassword,
                 isAdmin: isAdmin,
                 token: '',
+                resetToken: '',
                 tokens: ['', '']
             }
 
@@ -135,6 +179,15 @@ const generateTokenResponse = (user: User) => {
         id : user.id
     }, process.env.JWT_SECRET!, {
         expiresIn: process.env.JWT_EXPIRE
+    });
+    return token;
+}
+
+const generateResetTokenResponse = (user: User) => { 
+    const token = jwt.sign({
+        id : user.id
+    }, process.env.JWT_SECRET!, {
+        expiresIn: process.env.JWT_RESET_EXPIRE
     });
     return token;
 }

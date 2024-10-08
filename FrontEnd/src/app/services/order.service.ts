@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Order } from '../shared/models/Order';
-import { ORDERS_BY_USER_URL, ORDER_BY_ID_URL } from '../shared/constants/urls';
+import { ORDERS_BY_USER_URL, ORDERS_URL, ORDER_BY_ID_URL } from '../shared/constants/urls';
 import { ProductService } from './product.service';
 
 

@@ -16,7 +16,7 @@
     </p-confirmDialog>
     <div class="sidenav">
         <a routerLink="/users-page" class="btn1"><span class="pi pi-users" style="font-size: 30px;"></span> Users</a>
-        <a routerLink="/supplier-page" class="btn2"><span class="pi pi-truck" style="font-size: 30px;"></span> Suppliers</a>
+        <!-- <a routerLink="/supplier-page" class="btn2"><span class="pi pi-truck" style="font-size: 30px;"></span> Suppliers</a> -->
         <a routerLink="/" class="btn3"><span class="pi pi-box" style="font-size: 30px;"></span> Products</a>
         <a routerLink="/orders-page" class="btn4"><span class="pi pi-list" style="font-size: 30px;"></span> Orders</a>
     </div>
@@ -32,12 +32,23 @@
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 >
                 <ng-template pTemplate="caption">
-                        <div class="flex" style="position: relative;margin-left: 72%;">
+                    <div style="display: flex;">
+                        <div>
+                            <button
+                                pButton
+                                label="Clear"
+                                class="p-button-outlined"
+                                icon="pi pi-filter-slash"
+                            ></button>
+                        </div>
+    
+                        <div style="margin-left: auto;">
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search" (click)="search(s.value)"></i>
                                 <input #s type="text" placeholder="Search Product" pInputText (keyup.enter)="search(s.value)" [value]="searchTerm"/>
                             </span>
                         </div>
+                    </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
@@ -46,7 +57,7 @@
                         <th style="width: 15%;">Supplier</th>
                         <th style="width: 10%;">Weight</th>
                         <th style="width: 10%;">Quantity</th>
-                        <th style="width: 40%;">Actions</th>
+                        <th></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-product let-i="rowIndex">
@@ -56,10 +67,10 @@
                         <td>{{ product.supplier }}</td>
                         <td>{{ product.weight }}</td>
                         <td>{{ product.quantity }}</td>
-                        <td>
-                            <p-button  class="btn" label="ADD TO BAG" styleClass="p-button-outlined" (click)="addToBag(product)"></p-button>
-                            <p-button  *ngIf="isAdmin" class="btn" icon="pi pi-user-edit" styleClass="p-button-outlined p-button-success"  (click)="openEditPrForm(product)" ></p-button>
-                            <p-button  *ngIf="isAdmin" class="btn" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger" (click)="confirm(product.id)"></p-button>
+                        <td style="text-align: right;">
+                            <p-button  class="btn" label="Add to bag" icon="pi pi-shopping-bag" styleClass="p-button-rounded" (click)="addToBag(product)"></p-button>
+                            <p-button  *ngIf="isAdmin" class="btn" icon="pi pi-user-edit" styleClass="p-button-outlined p-button-success p-button-rounded"  (click)="openEditPrForm(product)" ></p-button>
+                            <p-button  *ngIf="isAdmin" class="btn" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger p-button-rounded" (click)="confirm(product.id)"></p-button>
                         </td>
                     </tr>
                 </ng-template>

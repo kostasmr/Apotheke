@@ -3,6 +3,8 @@ import { sample_orders} from '../data';
 import expressAsyncHandler from 'express-async-handler';
 import auth from '../middlewares/auth'
 import { OrderModel } from "../models/order.model";
+import { UserModel } from "../models/user.model";
+import { HTTP_BAD_REQUEST } from "../constants/http_status";
 
 const router = Router();
 
@@ -38,7 +40,5 @@ router.get("/viewOrder/:id", expressAsyncHandler(
         res.send(order)
     }
 ));
-
-
 
 export default router;

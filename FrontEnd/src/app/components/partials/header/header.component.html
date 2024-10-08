@@ -1,6 +1,6 @@
 <header *ngIf="isAuth">
     <div class="container">
-        <a *ngIf="isAuth" routerLink="/" class="logo">Apotheke.</a>
+        <a *ngIf="isAuth" routerLink="/" class="logo">Apotheke</a>
         <nav>
             <ul>
                 <li *ngIf="!isAuth">
@@ -12,13 +12,13 @@
                 <li *ngIf="isAuth" class="menu-container">
                     <a routerLink="/dashboard">{{user.name}}</a>
                     <div class="menu">
-                        <a routerLink="/profile">Profile</a>
+                        <!-- <a routerLink="/profile">Profile</a> -->
                         <a (click)="logout()">Logout</a>
                     </div>
                 </li>
                 <li *ngIf="isAuth">
-                    <a routerLink="/bag-page">
-                        Bag <span>{{bagQuantity}}</span>
+                    <a routerLink="/bag-page" >
+                        <span class="pi pi-shopping-bag" style="font-size: 30px;padding-right: 10px;margin-top: 5px;"></span><span class="quantity">{{bagQuantity}}</span>
                     </a>
                 </li>
             </ul>

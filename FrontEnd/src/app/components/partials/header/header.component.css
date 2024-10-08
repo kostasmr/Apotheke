@@ -42,7 +42,7 @@ header{
     font-size:2rem;
   }
   
-  a span{
+  .quantity{
     background: #0086c4;
     color: white;
     padding: 0.1rem 0.45rem;

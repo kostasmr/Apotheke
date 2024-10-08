@@ -6,6 +6,7 @@ import { User } from 'src/app/shared/models/User';
 import { UserFormPageComponent } from '../../forms/user-form-page/user-form-page.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationService, Message, PrimeNGConfig } from 'primeng/api';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-users-page',
@@ -24,7 +25,8 @@ export class UsersPageComponent  implements OnInit{
     private userService:UserService,
     private _dialog: MatDialog,
     private confService: ConfirmationService,
-    private primengConfig: PrimeNGConfig) {
+    private primengConfig: PrimeNGConfig,
+    private orderService: OrderService) {
     let userObservable: Observable<User[]>;
     activatedRoute.params.subscribe((params) => {
       if(params.searchTerm){

@@ -6,6 +6,7 @@ export class User{
     password!:string;
     name!:string;
     token!:string;
+    resetToken!:string;
     isAdmin!:boolean;
     tokens!:[];
 }

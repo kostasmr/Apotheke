@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../shared/models/User';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { HttpClient } from '@angular/common/http';
-import { USERS_BY_SEARCH_URL, USER_BY_ID_URL, USER_LOGIN_URL, USER_LOGOUT_URL, USER_PAGE_URL, USER_REGISTER_PAGE_URL } from '../shared/constants/urls';
+import { USERS_BY_SEARCH_URL, USER_BY_ID_URL, USER_LOGIN_URL, USER_LOGOUT_URL, USER_PAGE_URL, USER_REGISTER_PAGE_URL, USER_RESET_URL } from '../shared/constants/urls';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterLink } from '@angular/router';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
@@ -24,7 +24,6 @@ export class UserService {
     return this.userSubject.value;
   }
 
-
   getAll(){
     return this.http.get<User[]>(USER_PAGE_URL);
   }
@@ -40,10 +39,16 @@ export class UserService {
   login(userLogin:IUserLogin):Observable<User>{
     return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(tap({
       next: (user) => {
-        this.setUserToLocalStorage(user);
-        this.userSubject.next(user);
+        setTimeout(() => {
+          this.setUserToLocalStorage(user);
+          this.userSubject.next(user);
+        }, 500);
+
       },
       error: (errorResponse) => {
+        setTimeout(function() {
+        }, 3000);
+
         this.toastrService.error(errorResponse.error, 'Login Failed');
       }
     }));
@@ -88,6 +93,14 @@ export class UserService {
 
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`http://localhost:8080/api/users/${id}`);
+  }
+
+  resetPassword(email: any): Observable<any>{
+    return this.http.post(USER_RESET_URL, email);
+  }
+
+  changePassword(data: any): Observable<any> {
+    return this.http.patch(USER_RESET_URL, data);
   }
 
 }

@@ -81,7 +81,6 @@ export class HomeComponent  implements OnInit {
 
   ngOnInit(): void {
     this.getProductList();
-    throw new Error('Method not implemented.');
   }
   
   deleteProduct(id: number) {

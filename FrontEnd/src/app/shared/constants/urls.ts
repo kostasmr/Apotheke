@@ -13,6 +13,7 @@ export const USER_PROFILE_URL = USER_URL + '/profile';
 export const USERS_BY_SEARCH_URL = USER_URL + '/searchUser/';
 export const USER_REGISTER_PAGE_URL = USER_URL + '/register';
 export const USER_LOGOUT_URL = USER_URL + '/logout';
+export const USER_RESET_URL = USER_URL + '/reset';
 
 
 export const SUPPLIER_URL = BASE_URL + '/api/suppliers';

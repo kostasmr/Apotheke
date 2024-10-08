@@ -1,6 +1,6 @@
 <div class="sidenav">
     <a routerLink="/users-page" class="btn1"><span class="pi pi-users" style="font-size: 30px;"></span> Users</a>
-    <a routerLink="/supplier-page" class="btn2"><span class="pi pi-truck" style="font-size: 30px;"></span> Suppliers</a>
+    <!-- <a routerLink="/supplier-page" class="btn2"><span class="pi pi-truck" style="font-size: 30px;"></span> Suppliers</a> -->
     <a routerLink="/" class="btn3"><span class="pi pi-box" style="font-size: 30px;"></span> Products</a>
     <a routerLink="/orders-page" class="btn4"><span class="pi pi-list" style="font-size: 30px;"></span> Orders</a>
 </div>
@@ -15,27 +15,38 @@
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             >
-            <ng-template pTemplate="caption" >
-                <div class="flex" style="position: relative;margin-left: 72%;">
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search" (click)="search(s.value)"></i>
-                        <input #s type="text" placeholder="Search Supplier" pInputText (keyup.enter)="search(s.value)" [value]="searchTerm"/>
-                    </span>
+            <ng-template pTemplate="caption">
+                <div style="display: flex;">
+                    <div>
+                        <button
+                            pButton
+                            label="Clear"
+                            class="p-button-outlined"
+                            icon="pi pi-filter-slash"
+                        ></button>
+                    </div>
+
+                    <div style="margin-left: auto;">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search" (click)="search(s.value)"></i>
+                            <input #s type="text" placeholder="Search Order" pInputText (keyup.enter)="search(s.value)" [value]="searchTerm"/>
+                        </span>
+                    </div>
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th>No.</th>
                     <th>User</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-order let-i="rowIndex">
                 <tr>
                     <td style="width: 10%;">{{ i + 1 }}</td>
                     <td style="width: 60%;">{{ order.user }}</td>
-                    <td>
-                        <p-button  class="btn" label="View Order" styleClass="p-button-outlined" (click)="viewOrder(order)"></p-button>
+                    <td style="text-align: right;">
+                        <p-button  class="btn" icon="pi pi-search" styleClass="p-button-warning p-button-rounded" (click)="viewOrder(order)"></p-button>
                     </td>
                 </tr>
             </ng-template>

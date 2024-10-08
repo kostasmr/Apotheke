@@ -26,12 +26,11 @@ export class HeaderComponent implements OnInit{
   } 
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   logout(){
     this.userService.logout(this.user.id);
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/");
   }
 
   get isAdmin(){
