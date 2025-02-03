@@ -14,7 +14,7 @@ Apotheke is a web application designed to **streamline order management** for us
 
 - **Users**: 
   - Can log in or sign up.
-  - View tabs such as **Products, Suppliers, Users, and Orders**.
+  - View tabs such as **Products, Users, and Orders**.
   - Add products to their bucket and send orders.
 
 - **Admins**: 
